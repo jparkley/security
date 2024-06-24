@@ -10,7 +10,14 @@ export class AuthService {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
-  validateUser(user: UserType) {
-    console.log('==== user in authService.validateUser', user);
+  async validateUser(user: UserType) {
+    const userFound = await this.userRepository.findOneBy({
+      email: user.email,
+    });
+
+    if (userFound) return userFound;
+
+    const newUser = this.userRepository.create(user); // create a new entity instance
+    return this.userRepository.save(newUser);
   }
 }

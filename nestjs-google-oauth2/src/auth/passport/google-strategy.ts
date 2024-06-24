@@ -1,11 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { Profile, Strategy } from 'passport-google-oauth20';
+import { AuthService } from '../auth.service';
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy) {
-  constructor(private readonly configService: ConfigService) {
+  constructor(
+    private readonly configService: ConfigService,
+    @Inject('AUTH_SERVICE') private readonly authService: AuthService,
+  ) {
     super({
       clientID: configService.getOrThrow('GCP_CLIENT_ID'),
       clientSecret: configService.getOrThrow('GCP_CLIENT_SECRET'),
@@ -15,6 +19,10 @@ export class GoogleStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(accessToken: string, refreshToken: string, profile: Profile) {
-    console.log('args in validate', accessToken, refreshToken, profile);
+    const userValidated = await this.authService.validateUser({
+      email: profile.emails[0].value,
+      displayName: profile.displayName,
+    });
+    return userValidated || null;
   }
 }
