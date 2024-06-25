@@ -2,10 +2,6 @@
 
 # Description
 
-## User Security / Login Security / Authentication methods
+## Authentication Methods
 
-Implement MFA in ReactJs
-
-OAuth2
-
-JWT
+- [Implement Secure User Authentication with Google OAuth2 in Nest.js](https://github.com/jparkley/security-authentication/tree/main/nestjs-google-oauth2)
