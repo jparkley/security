@@ -20,4 +20,9 @@ export class AuthService {
     const newUser = this.userRepository.create(user); // create a new entity instance
     return this.userRepository.save(newUser);
   }
+
+  async findUser(id: number) {
+    const user = await this.userRepository.findOneBy({ id });
+    return user;
+  }
 }
