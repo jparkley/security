@@ -3,6 +3,7 @@ require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
@@ -16,3 +17,5 @@ mongoose
 
 app.get("/", (req, res) => res.render("home"));
 app.get("/recipes", (req, res) => res.render("recipes"));
+
+app.use(authRoutes);
