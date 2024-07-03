@@ -143,3 +143,7 @@ header .btn {
   width: 100px;
   margin: -30px auto 20px;
 }
+
+button {
+  cursor: pointer;
+}
