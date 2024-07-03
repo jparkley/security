@@ -48,11 +48,16 @@ function getLogin(req, res) {
   res.render("login");
 }
 
-function postLogin(req, res) {
+const postLogin = async (req, res) => {
   const { email, password } = req.body;
-  console.log("--=======---", email, password);
-  res.send("post login");
-}
+
+  try {
+    const user = await User.login(email, password);
+    res.status(200).json({ user: user._id });
+  } catch (error) {
+    res.status(400).json({});
+  }
+};
 
 module.exports = {
   getSignup,
