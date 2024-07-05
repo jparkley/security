@@ -52,8 +52,8 @@ nav li a {
   letter-spacing: 2px;
 }
 .btn {
-  border-radius: 36px;
-  background: #fee996;
+  border-radius: 24px;
+  background: #96e1fe;
 }
 form h2 {
   font-size: 2.4em;
@@ -81,8 +81,8 @@ label {
 }
 button {
   margin-top: 30px;
-  border-radius: 36px;
-  background: #fee996;
+  border-radius: 24px;
+  background: #96e1fe;
   border: 0;
   text-transform: uppercase;
   font-weight: 700;

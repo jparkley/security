@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 
 const authRoutes = require("./routes/authRoutes");
+const verifyJwt = require("./common/middleware/authMiddleware");
 
 const app = express();
 app.use(express.json());
@@ -20,6 +21,6 @@ mongoose
   .catch((error) => console.log("Error in connecting to MongoDB", error));
 
 app.get("/", (req, res) => res.render("home"));
-app.get("/recipes", (req, res) => res.render("recipes"));
+app.get("/recipes", verifyJwt, (req, res) => res.render("recipes"));
 
 app.use(authRoutes);
