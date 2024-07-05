@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 
 const authRoutes = require("./routes/authRoutes");
-const verifyJwt = require("./common/middleware/authMiddleware");
+const { verifyJwt, checkUser } = require("./common/middleware/authMiddleware");
 
 const app = express();
 app.use(express.json());
@@ -20,6 +20,7 @@ mongoose
   .then((result) => app.listen(3000))
   .catch((error) => console.log("Error in connecting to MongoDB", error));
 
+app.get("*", checkUser);
 app.get("/", (req, res) => res.render("home"));
 app.get("/recipes", verifyJwt, (req, res) => res.render("recipes"));
 

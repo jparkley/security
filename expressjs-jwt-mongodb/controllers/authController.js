@@ -39,9 +39,9 @@ const handleErrors = (error) => {
   return errors;
 };
 
-function getSignup(req, res) {
+const getSignup = (req, res) => {
   res.render("signup");
-}
+};
 
 const postSignup = async (req, res) => {
   const { email, password } = req.body;
@@ -58,9 +58,9 @@ const postSignup = async (req, res) => {
   }
 };
 
-function getLogin(req, res) {
+const getLogin = (req, res) => {
   res.render("login");
-}
+};
 
 const postLogin = async (req, res) => {
   const { email, password } = req.body;
@@ -77,9 +77,15 @@ const postLogin = async (req, res) => {
   }
 };
 
+const getLogout = (req, res) => {
+  res.cookie("jwt", "", { maxAge: 1 });
+  res.redirect("/");
+};
+
 module.exports = {
   getSignup,
   postSignup,
   getLogin,
   postLogin,
+  getLogout,
 };
